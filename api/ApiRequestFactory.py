@@ -66,7 +66,7 @@ class ApiRequestFactory:
                 meta_dump = json.dumps(meta)
 
                 for e in data:
-                    dump = json.dump(e)
+                    dump = json.dumps(e)
 
                     t = json.loads(dump)
 
