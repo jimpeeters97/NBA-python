@@ -23,15 +23,19 @@ def show_players():
 
     players = ApiRequestFactory().get_players()
 
+    scroll = tk.Scrollbar(window)
+    scroll.pack(side=tk.RIGHT, fill=tk.Y)
+
+    listbox = tk.Listbox(window, yscrollcommand=scroll.set)
+
     for pl in players:
-        first_name_lb = tk.Label(window, text=pl.first_name)
-        last_name_lb = tk.Label(window, text=pl.last_name)
-        position_lb = tk.Label(window, text=pl.position)
+        listbox.insert(tk.END, pl.first_name + " " + pl.last_name + ": " + pl.position)
 
-        first_name_lb.pack()
-        last_name_lb.pack()
-        position_lb.pack()
+    listbox.pack(side=tk.LEFT)
 
+    scroll.config(command=listbox.yview)
+
+    window.geometry("400x300")
     window.mainloop()
 
 
