@@ -26,18 +26,14 @@ class ApiRequestFactory:
                 meta_dump = json.dumps(meta)
 
                 for e in data:
-                    data_dump = json.dumps(e)
-
-                    t = json.loads(data_dump)
-
-                    team_dict = t.get('team')
+                    team_dict = e.get('team')
 
                     team = Team(team_dict.get('id'), team_dict.get('abbreviation'), team_dict.get('city'),
                                 team_dict.get('conference'), team_dict.get('division'), team_dict.get('full_name'),
                                 team_dict.get('name'))
 
-                    pl = Player(t.get('id'), t.get('first_name'), t.get('last_name'), t.get('height_feet'), t.get('height_inches'),
-                                t.get('position'), team, t.get('weight_pounds'))
+                    pl = Player(e.get('id'), e.get('first_name'), e.get('last_name'), e.get('height_feet'),
+                                e.get('height_inches'), e.get('position'), team, e.get('weight_pounds'))
 
                     players.append(pl)
 
@@ -66,12 +62,8 @@ class ApiRequestFactory:
                 meta_dump = json.dumps(meta)
 
                 for e in data:
-                    dump = json.dumps(e)
-
-                    t = json.loads(dump)
-
-                    team = Team(t.get('id'), t.get('abbreviation'), t.get('city'),t.get('conference'), t.get('division'),
-                                t.get('full_name'), t.get('name'))
+                    team = Team(e.get('id'), e.get('abbreviation'), e .get('city'), e.get('conference'),
+                                e.get('division'), e.get('full_name'), e.get('name'))
 
                     teams.append(team)
 
