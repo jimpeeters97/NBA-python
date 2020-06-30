@@ -2,6 +2,8 @@ import tkinter as tk
 
 from api.ApiRequestFactory import ApiRequestFactory
 
+factory = ApiRequestFactory()
+
 
 def main():
     window = tk.Tk()
@@ -21,7 +23,7 @@ def show_players():
 
     window.title("NBA Players")
 
-    players = ApiRequestFactory().get_players()
+    players = factory.get_players()
 
     scroll = tk.Scrollbar(window)
     scroll.pack(side=tk.RIGHT, fill=tk.Y)
@@ -44,7 +46,7 @@ def show_teams():
 
     window.title("NBA Teams")
 
-    teams = ApiRequestFactory().get_teams()
+    teams = factory.get_teams()
 
     for tm in teams:
         name_lb = tk.Label(window, text=tm.name)
