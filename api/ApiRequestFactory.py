@@ -7,10 +7,22 @@ from domain.Team import Team
 
 
 class ApiRequestFactory:
+    __instance = None
 
     def __init__(self):
         self.players = []
         self.teams = []
+
+        if ApiRequestFactory.__instance is not None:
+            raise Exception("This class is a singleton!")
+        else:
+            ApiRequestFactory.__instance = self
+
+    @staticmethod
+    def get_instance():
+        if ApiRequestFactory.__instance is None:
+            ApiRequestFactory()
+        return ApiRequestFactory.__instance
 
     def get_players(self):
         if not self.players:
