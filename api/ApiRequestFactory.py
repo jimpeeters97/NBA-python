@@ -1,6 +1,7 @@
 import requests
 import json
 import time
+import logging
 
 from domain.Player import Player
 from domain.Team import Team
@@ -12,6 +13,8 @@ class ApiRequestFactory:
     def __init__(self):
         self.players = []
         self.teams = []
+
+        logging.basicConfig(level=logging.INFO)
 
         if ApiRequestFactory.__instance is not None:
             raise Exception("This class is a singleton!")
@@ -29,6 +32,7 @@ class ApiRequestFactory:
             players = []
             page = 1
 
+            logging.info('Receiving players from API')
             while page is not None:
                 response = requests.get('https://www.balldontlie.io/api/v1/players?page=' + str(page) + '&per_page=100')
 
@@ -55,6 +59,7 @@ class ApiRequestFactory:
             self.set_players(players)
             return players
         else:
+            logging.info('Receiving players from cache')
             return self.players
 
     def set_players(self, players):
@@ -65,6 +70,7 @@ class ApiRequestFactory:
             teams = []
             page = 1
 
+            logging.info('Receiving teams from API')
             while page is not None:
                 response = requests.get('https://www.balldontlie.io/api/v1/teams')
 
@@ -86,6 +92,7 @@ class ApiRequestFactory:
             self.set_teams(teams)
             return teams
         else:
+            logging.info('Receiving teams from cache')
             return self.teams
 
     def set_teams(self, teams):
